@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeux Steam</title>
+    <link href="/static/output.css" rel="stylesheet">
+</head>
+<body class="bg-slate-300">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-4 text-center">Jeux Steam les plus populaires :</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {% for game in games %}
+            <div class="bg-white rounded-lg p-4 w-full sm:w-[20rem] md:w-auto">
+                <img src="{{ game['icon_image_url'] }}" alt="{{ game['name'] }} Icon" class="w-16 h-16 mx-auto mb-4">
+                <p class="text-lg font-semibold text-center ">{{ game['name'] }}</p>
+                <p class="text-sm text-gray-600 text-center ">{{ game['current_players'] }} joueurs en ligne</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
