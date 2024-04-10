@@ -8,8 +8,15 @@
 </head>
 <body class="bg-cyan-950">
     <div class="container mx-auto px-4 py-8 flex flex-col items-center justify-center">
+        <div class="bg-white rounded-lg p-4 mb-4">
+            <form action="/" method="get">
+                <label for="gameLimit">Nombre de jeux à afficher :</label>
+                <input type="number" id="gameLimit" name="gameLimit" min="1" max="50" value="10">
+                <button type="submit">Mettre à jour</button>
+            </form>
+        </div>
         <div class="flex items-center">
-            <h2 class="text-4xl mt-[0.1rem] mb-2 font-normal mr-2 text-white underline" style="text-underline-offset: 0.8rem;"">Bienvenue sur Steam Tracker</h2>
+            <h2 class="text-4xl mt-[0.1rem] mb-2 font-normal mr-2 text-white underline" style="text-underline-offset: 0.8rem;">Bienvenue sur Steam Tracker</h2>
             <img src="/static/Steam-Logo.png" alt="Logo Steam" class="w-17 h-11 mr-2">
         </div>
         <div class="flex">
@@ -25,10 +32,11 @@
                     <ul>
                         {% for game in games %}
                         <li class="mb-4">
+                            <p class="text-lg font-semibold">{{ game['name'] }}</p>
                             <img src="{{ game['icon_image_url'] }}" alt="{{ game['name'] }} Icon" class="w-12 h-12 mr-2 inline-block">
                             <div class="inline-block">
-                                <p class="text-lg font-semibold">{{ game['name'] }}</p>
-                                <p class="text-sm text-gray-600">{{ game['current_players'] }} joueurs en ligne</p>
+                                <p class="text-sm text-gray-600 mt-[0.2rem]">Ils sont actuellement {{ game['community_hub_members'] }} dans la communauté {{ game['name'] }}</p>
+                                <p class="text-sm text-gray-600">Avec {{ game['current_players'] }} joueurs en ligne</p>
                             </div>
                         </li>
                         {% endfor %}

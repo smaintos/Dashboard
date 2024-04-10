@@ -729,6 +729,22 @@ video {
   margin-right: 6rem;
 }
 
+.mt-\[0\.2rem\] {
+  margin-top: 0.2rem;
+}
+
+.mr-\[1rem\] {
+  margin-right: 1rem;
+}
+
+.ml-0 {
+  margin-left: 0px;
+}
+
+.mt-0 {
+  margin-top: 0px;
+}
+
 .inline-block {
   display: inline-block;
 }

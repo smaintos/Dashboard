@@ -1,7 +1,7 @@
 import matplotlib
 matplotlib.use('Agg')  # Utiliser un backend non interactif
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 import base64
 from io import BytesIO
@@ -11,7 +11,8 @@ import numpy as np
 app = Flask(__name__)
 
 def get_api_data():
-    url = "https://api.steambase.io/games?sortBy=players&sortDirection=1&skip=0&take=10"
+    game_limit = request.args.get('gameLimit', default=10, type=int)
+    url = f"https://api.steambase.io/games?sortBy=players&sortDirection=1&skip=0&take={game_limit}"
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
@@ -44,7 +45,6 @@ def create_custom_chart(games):
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
     plt.close(fig)  # Fermer la figure pour libérer la mémoire
     return f"data:image/png;base64,{data}"
-
 
 @app.route('/')
 def index():
