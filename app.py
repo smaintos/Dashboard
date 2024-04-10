@@ -26,18 +26,17 @@ def create_custom_chart(games):
     # Créer le graphique
     fig, ax = plt.subplots()
     
-    # Créer un bar chart basé sur les données de l'API
-    ax.bar(labels, values)
+    # Créer un scatter plot basé sur les données de l'API
+    ax.scatter(values, labels, color='skyblue', s=100)
     
-    ax.set(xlim=(0, len(labels)), xticks=np.arange(len(labels)),
-           ylim=(0, max(values)*1.2))
+    ax.set(xlabel='Nombre de joueurs en ligne', ylabel='Jeux')
     
-    # Ajouter les labels
-    ax.set_xticklabels(labels, rotation=45, ha="right")
+    # Ajouter les valeurs à côté des points
+    for i, (v, label) in enumerate(zip(values, labels)):
+        ax.text(v + max(values)*0.01, label, str(v), ha='left', va='center')
     
-    # Ajouter les valeurs au-dessus des barres
-    for i, v in enumerate(values):
-        ax.text(i, v + max(values)*0.01, str(v), ha='center', va='bottom')
+    # Inverser l'axe des ordonnées pour afficher les jeux dans l'ordre inverse
+    ax.invert_yaxis()
     
     # Sauvegarder le graphique en tant qu'image PNG
     buf = BytesIO()
@@ -45,6 +44,7 @@ def create_custom_chart(games):
     data = base64.b64encode(buf.getbuffer()).decode("ascii")
     plt.close(fig)  # Fermer la figure pour libérer la mémoire
     return f"data:image/png;base64,{data}"
+
 
 @app.route('/')
 def index():
