@@ -79,7 +79,15 @@ def create_disonnected_chart(games):
 
 
 def calculate_disconnected_players(game):
-    return game['community_hub_members'] - game['current_players']
+    community_members = game.get('community_hub_members')
+    current_players = game.get('current_players')
+    
+    # Vérifier si les données sont disponibles
+    if community_members is not None and current_players is not None:
+        return community_members - current_players
+    else:
+        return 0  # Ou une autre valeur par défaut que vous préférez
+
 
 @app.route('/')
 def index():
