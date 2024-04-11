@@ -28,14 +28,14 @@ def create_custom_chart(games):
     # Créer le graphique
     fig, ax = plt.subplots()
     
-    # Créer un scatter plot basé sur les données de l'API
-    ax.scatter(values, labels, color='green', s=100)
+    # Créer un bar chart basé sur les données de l'API
+    ax.barh(labels, values, color='green')
     
     ax.set(xlabel='Nombre de joueurs en ligne', ylabel='Jeux')
     
-    # Ajouter les valeurs à côté des points
+    # Ajouter les valeurs au-dessus des barres
     for i, (v, label) in enumerate(zip(values, labels)):
-        ax.text(v + max(values)*0.01, label, str(v), ha='left', va='center')
+        ax.text(v + max(values)*0.01, i, str(v), ha='left', va='center')
     
     # Inverser l'axe des ordonnées pour afficher les jeux dans l'ordre inverse
     ax.invert_yaxis()
@@ -48,24 +48,30 @@ def create_custom_chart(games):
     return f"data:image/png;base64,{data}"
 
 def create_disonnected_chart(games):
-    # Utiliser les données de l'API pour générer le graphique
-    values = [game['disconnected_players'] for game in games]
-    labels = [game['name'] for game in games]
+    # Tri des jeux par nombre de joueurs déconnectés (ordre croissant)
+    games_sorted = sorted(games, key=lambda x: x['disconnected_players'])
+    
+    # Inverser l'ordre de la liste triée pour afficher les jeux avec le plus de joueurs déconnectés en haut
+    games_sorted = list(reversed(games_sorted))
+    
+    # Utiliser les données triées pour générer le graphique
+    values = [game['disconnected_players'] for game in games_sorted]
+    labels = [game['name'] for game in games_sorted]
     
     # Créer le graphique
     fig, ax = plt.subplots()
     
-    # Créer un scatter plot basé sur les données de l'API
-    ax.scatter(values, labels, color='red', s=100)
+    # Créer un bar chart basé sur les données triées de l'API
+    ax.barh(labels, values, color='red')
     
     ax.set(xlabel='Nombre de joueurs déconnectés', ylabel='Jeux')
     
     # Changer l'échelle de l'axe des abscisses pour afficher les unités souhaitées
     ax.set_xlim([0, max(values)])  # Ajoutez 100 000 à la valeur maximale
     
-    # Ajouter les valeurs à côté des points
+    # Ajouter les valeurs au-dessus des barres
     for i, (v, label) in enumerate(zip(values, labels)):
-        ax.text(v + max(values)*0.01, label, str(v), ha='left', va='center')
+        ax.text(v + max(values)*0.01, i, str(v), ha='left', va='center')
     
     # Inverser l'axe des ordonnées pour afficher les jeux dans l'ordre inverse
     ax.invert_yaxis()
