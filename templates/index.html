@@ -32,6 +32,7 @@
             margin-left: 4px; /* Ajustez selon vos préférences */
             vertical-align: middle; /* Alignement vertical */
         }
+        
     </style>
 </head>
 <body class="bg-cyan-950">
@@ -49,8 +50,18 @@
                             Graphique des onlines tops games steam players
                         </span>
                         <span class="online-dot"></span> :
-                    </p>                    <br>
+                    </p>                    
+                    <br>
                     <img src="{{ custom_chart_data }}" alt="Custom Chart" class="w-full h-auto mx-auto mb-4">
+
+                    <p class="text-lg font-semibold ml-[1.5rem]">
+                        <span style=" border-bottom: 1px solid black; padding-bottom: 5px;">
+                            Graphique des offlines tops games steam players
+                        </span>
+                        <span class="offline-dot"></span> :
+                    </p>
+                    <br>
+                    <img src="{{ disconnected_chart_data }}" alt="Custom Chart" class="w-full h-auto mx-auto mb-4">
                 </div>
             </div>
             <div class="w-1/2">

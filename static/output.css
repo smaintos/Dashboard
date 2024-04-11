@@ -633,6 +633,10 @@ video {
   margin-left: 1.5rem;
 }
 
+.ml-\[rem\] {
+  margin-left: rem;
+}
+
 .inline-block {
   display: inline-block;
 }
