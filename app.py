@@ -28,7 +28,7 @@ def create_custom_chart(games):
     fig, ax = plt.subplots()
     
     # Créer un scatter plot basé sur les données de l'API
-    ax.scatter(values, labels, color='skyblue', s=100)
+    ax.scatter(values, labels, color='green', s=100)
     
     ax.set(xlabel='Nombre de joueurs en ligne', ylabel='Jeux')
     
@@ -46,11 +46,16 @@ def create_custom_chart(games):
     plt.close(fig)  # Fermer la figure pour libérer la mémoire
     return f"data:image/png;base64,{data}"
 
+def calculate_disconnected_players(game):
+    return game['community_hub_members'] - game['current_players']
+
 @app.route('/')
 def index():
     api_data = get_api_data()
     if api_data:
         games = api_data
+        for game in games:
+            game['disconnected_players'] = calculate_disconnected_players(game)  # Calculer le nombre de joueurs déconnectés
         custom_chart_data = create_custom_chart(games)
         return render_template('index.html', games=games, custom_chart_data=custom_chart_data)
     else:
