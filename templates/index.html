@@ -7,18 +7,16 @@
     <link href="/static/output.css" rel="stylesheet">
 
     <style>
-        /* Style pour le point vert */
         .online-dot {
             width: 8px;
             height: 8px;
             background-color: green;
             border-radius: 50%;
             display: inline-block;
-            margin-left: 4px; /* Ajustez selon vos préférences */
-            vertical-align: middle; /* Alignement vertical */
+            margin-left: 4px; 
+            vertical-align: middle; 
         }
 
-        /* Ajout de la classe pour aligner verticalement */
         .align-middle {
             vertical-align: middle;
         }
@@ -29,8 +27,8 @@
             background-color: red;
             border-radius: 50%;
             display: inline-block;
-            margin-left: 4px; /* Ajustez selon vos préférences */
-            vertical-align: middle; /* Alignement vertical */
+            margin-left: 4px; 
+            vertical-align: middle; 
         }
         
     </style>
@@ -64,7 +62,7 @@
                     <br>
                     <img src="{{ disconnected_chart_data }}" alt="Custom Chart" class="w-full h-auto mx-auto mb-4">
                 </div>
-                <!-- Ajout du bouton de redirection -->
+
             <div class="container mx-auto px-4 py-4 flex items-center justify-center mt-4">
                 <a href="https://store.steampowered.com/" class="bg-blue-400 text-black px-4 py-2 hover:bg-blue-700 inline-block">Lets'go Steam nan ?</a>
             </div>
@@ -83,13 +81,12 @@
                         {% for game in games %}
                         <li class="mb-4">
                             <p class="text-lg font-semibold">{{ game['name'] }}</p>
-                            <img src="{{ game['icon_image_url'] }}" alt="{{ game['name'] }} Icon" class="w-12 h-12 mr-2 inline-block align-middle"> <!-- Ajout de la classe pour alignement vertical -->
+                            <img src="{{ game['icon_image_url'] }}" alt="{{ game['name'] }} Icon" class="w-12 h-12 mr-2 inline-block align-middle"> 
                             <div class="inline-block align-middle">
                                 <p class="text-sm text-gray-600 mt-[0.2rem]">Ils sont actuellement {{ game['community_hub_members'] }} dans la communauté {{ game['name'] }}.</p>
                                 <p class="text-sm text-gray-600">Avec {{ game['current_players'] }} joueurs en ligne<span class="online-dot"></span></p>
                                 <p class="text-sm text-gray-600">Avec {{ game['steam_positive_reviews'] }} reviews positifs.</p>
                                 <p class="text-sm text-gray-600">Avec {{ game['disconnected_players'] }} joueurs déconnectés<span class="offline-dot"></span></p>
-
                             </div>
                         </li>
                         {% endfor %}
